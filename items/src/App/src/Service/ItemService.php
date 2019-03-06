@@ -2,13 +2,16 @@
 namespace App\Service;
 
 use App\Model\Item;
+use \PDO;
 
 class ItemService {
 
     private $pdo;
 
     public function __construct($hostname, $username, $password, $dbname) {
-        $this->pdo = new \PDO ("mysql:host=$hostname;port=3306;dbname=$dbname", $username, $password);
+        $this->pdo = new PDO ("mysql:host=$hostname;port=3306;dbname=$dbname", $username, $password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     /**

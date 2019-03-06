@@ -10,8 +10,10 @@ services:
       - 80:80
     volumes:
       - ./items:/var/www/html
+    depends_on:
+      - itemdb
   itemdb:
-    image: mysql:5.7
+    image: mysql:5.7.25
     restart: always
     environment:
       MYSQL_DATABASE: 'shopmany'
@@ -29,8 +31,4 @@ services:
       - '3306'
       # Where our data will be persisted
     volumes:
-      - my-db:/var/lib/mysql
-      - ./db.sql:/docker-entrypoint-initdb.d/dump.sql
-# Names our volume
-volumes:
-  my-db:
+      - ./items/db.sql:/docker-entrypoint-initdb.d/dump.sql
