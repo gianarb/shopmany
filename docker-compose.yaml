@@ -1,0 +1,110 @@
+version: '3.3'
+
+services:
+  # item is the service that lists the available items with their price.
+  item:
+    restart: always
+    build:
+      context: ./items
+    ports:
+      - '3001:80'
+    volumes:
+      - ./items:/var/www/html
+    depends_on:
+      - itemdb
+    networks:
+      - gaworkshop
+      - shopmany
+  itemdb:
+    image: mysql:5.7.25
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'shopmany'
+      MYSQL_USER: 'hello'
+      MYSQL_PASSWORD: 'ciao'
+      MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - '3306'
+    volumes:
+      - ./items/db.sql:/docker-entrypoint-initdb.d/dump.sql
+    networks:
+      - gaworkshop
+      - shopmany
+
+  # it manages the discouts available for every item.
+  discount:
+    image: node:10.15.3-stretch
+    working_dir: /usr/src/app
+    volumes:
+      - ./discount:/usr/src/app
+    command: ["node", "./server.js"]
+    ports:
+      - '3003:3000'
+    depends_on:
+      - discountdb
+    networks:
+      - gaworkshop
+      - shopmany
+
+  discountdb:
+    image: mongo:4.0.6-xenial
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: "shopmany"
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./discount/init:/docker-entrypoint-initdb.d
+    networks:
+      - gaworkshop
+      - shopmany
+
+  # pay is a java app that handles items purchase
+  pay:
+    build:
+      context: ./pay
+    ports:
+      - '3002:8080'
+    networks:
+      - gaworkshop
+      - shopmany
+    depends_on:
+      - paydb
+
+  paydb:
+    image: mysql:5.7.25
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'pay'
+      MYSQL_USER: 'howdy'
+      MYSQL_PASSWORD: 'hellohello'
+      MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - '3306'
+    volumes:
+      - ./pay/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - gaworkshop
+      - shopmany
+
+  # frontend is the ui of the project
+  frontend:
+    image: golang:1.12.0-stretch
+    command: ["go", "run", "./main.go"]
+    ports:
+      - '3000:3000'
+    volumes:
+      - "./frontend:/opt/app"
+    working_dir: "/opt/app"
+    depends_on:
+      - item
+      - pay
+      - discount
+    networks:
+      - gaworkshop
+      - shopmany
+
+networks:
+  shopmany:
+  gaworkshop:
+    external: true

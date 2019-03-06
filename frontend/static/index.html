@@ -1,0 +1,98 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ShopMany - A place where you buy without spend money.</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <!-- header -->
+    <section class="pt-5 pb-5 mt-0 align-items-center section-header d-flex bg-dark">
+        <div class="container-fluid">
+            <div class="message row  justify-content-center align-items-center d-flex text-center">
+            <div class="col-12 col-md-8">
+                <h1 class="display-2  text-light mb-2 mt-5"><strong>ShopMany</strong> </h1>
+                <p class="lead  text-light mb-5">A lovely place where your money never decrease after a purchase</p>
+                <p class="text-light lead">Welcome <b><span class="me-name"></span></b>, your CUSTOMER_ID is: <b><span class="me-id"></span></b></p>
+            </div>
+          </div>
+        </div>
+    </section> <!-- header //-->
+
+    <!-- Section list of Items -->
+    <div class="mt-4 container">
+        <div class="row">
+
+            <div class="col-sm-9">
+				<h2><span class="glyphicon glyphicon-shopping-cart"></span> List of Items</h2>
+                <div class="row" id="items" >
+                </div>
+            </div>
+        <div class="col-sm-3 cart">
+
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<div class="row">
+                            <h2><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h2>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-6">
+                            <ul id="cart">
+                            </ul>
+						</div>
+					</div>
+					<hr>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class="row text-center">
+						<div class="col-xs-3">
+							<button type="button" id="pay" class="btn btn-success btn-block">
+								Total $ <strong class="tot-price"></strong> Checkout
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+        </div>
+        </div> <!-- row.// -->
+
+    </div> <!--container.//--> <!-- Section list of Items // -->
+
+
+    <footer class="footer">
+        <div class="container bottom_border">
+            <div class="row">
+                <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+                    <h5 class="headin5_amrc col_white_amrc pt2">Purpose</h5>
+                    <!--headin5_amrc-->
+                    <p class="mb12">The purpose for this project is to be the foundation to build workshops and tutorial on. I did when I was preparing an 8 hours training related to observability, monitoring and intrumentation</p>
+                </div>
+
+
+                <div class=" col-sm-4 col-md  col-6 col">
+                    <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
+                        <!--headin5_amrc-->
+                    <ul class="footer_ul_amrc">
+                        <li><a href="https://github.com.com/gianarb/shopmany">GitHub: gianarb/shopmany</a></li>
+                        <li><a href="https://twitter.com/gianarb">Twitter: @gianarb</a></li>
+                        <li><a href="https://gianarb.it">Blog</a></li>
+                    </ul>
+                    <!--footer_ul_amrc ends here-->
+                </div>
+                <!--footer_ul_amrc ends here-->
+            </div>
+        </div>
+    </footer>
+
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/js/mustache.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+</html>

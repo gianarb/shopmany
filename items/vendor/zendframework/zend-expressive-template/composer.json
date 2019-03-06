@@ -1,0 +1,63 @@
+{
+    "name": "zendframework/zend-expressive-template",
+    "description": "Template subcomponent for Expressive",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "expressive",
+        "template",
+        "zf",
+        "zendframework",
+        "zend-expressive"
+    ],
+    "support": {
+        "issues": "https://github.com/zendframework/zend-expressive-template/issues",
+        "source": "https://github.com/zendframework/zend-expressive-template",
+        "rss": "https://github.com/zendframework/zend-expressive-template/releases.atom",
+        "slack": "https://zendframework-slack.herokuapp.com",
+        "forum": "https://discourse.zendframework.com/c/questions/expressive"
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "malukenho/docheader": "^0.1.6",
+        "phpunit/phpunit": "^7.0.2",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "suggest": {
+        "zendframework/zend-expressive-platesrenderer": "^2.0 to use the Plates template renderer",
+        "zendframework/zend-expressive-twigrenderer": "^2.0 to use the Twig template renderer",
+        "zendframework/zend-expressive-zendviewrenderer": "^2.0 to use the zend-view PhpRenderer template renderer"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zend\\Expressive\\Template\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZendTest\\Expressive\\Template\\": "test/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev",
+            "dev-develop": "2.1.x-dev"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@license-check",
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "license-check": "docheader check src/ test/"
+    }
+}
