@@ -22,7 +22,8 @@ USE `shopmany` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shopmany`.`item` (
   `id` INT NOT NULL,
-  `name` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `price` FLOAT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -36,11 +37,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Insert data
 -- -----------------------------------------------------
 
-INSERT INTO shopmany.item (id, name)
-	VALUES(0, "pen");
-INSERT INTO shopmany.item (id, name)
-	VALUES(1, "cup");
-INSERT INTO shopmany.item (id, name)
-	VALUES(2, "coffe");
-INSERT INTO shopmany.item (id, name)
-	VALUES(3, "table");
+INSERT INTO shopmany.item (id, name, price)
+	VALUES(0, "pen", 2.35);
+INSERT INTO shopmany.item (id, name, price)
+	VALUES(1, "cup", 12.99);
+INSERT INTO shopmany.item (id, name, price)
+	VALUES(2, "coffe", 0.80);
+INSERT INTO shopmany.item (id, name, price)
+	VALUES(3, "table", 120.0);
