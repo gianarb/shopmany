@@ -37,3 +37,17 @@ Check it out
 $ curl http://localhost:3000/discount?itemid=10
 {"discount": {"dropoff_percent": 12}}
 ```
+
+## pay
+Pay is a java service that manages the purchase of a set of items from a
+specific customer. It uses SpringBoot as framework and MySQL as backend
+(probably).
+
+```
+docker-compose up pay
+```
+
+Check it out
+```
+$ curl http://localhost:3002:/pay
+```

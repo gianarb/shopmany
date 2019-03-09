@@ -53,3 +53,9 @@ services:
       - '27017:27017'
     volumes:
       - ./discount/init:/docker-entrypoint-initdb.d
+
+  pay:
+    build:
+      context: ./pay
+    ports:
+      - '3002:8080'
