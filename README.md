@@ -11,14 +11,29 @@ as db.
 
 In order to run it you can use `docker-compose`:
 
-```
+```bash
 docker-compose up item
 ```
 
 Just curl the main entrypoint and you should see a list of items in JS : (it takes a couple of seconds to work because
 it loads data and it configures mySQL)
 
-```
-$ curl http://localhost/item/10
+```bash
+$ curl http://localhost:3001/item
 {"items":[{"id":0,"name":"pen"},{"id":1,"name":"cup"},{"id":2,"name":"coffe"},{"id":3,"name":"table"}]}
+```
+
+## Discount
+Discount uses mongodn as backend and it is an application in NodeJS capable of
+giving back the discount % that should be applied to a specific item.
+
+```bash
+docker-compose up discount
+```
+
+Check it out
+
+```bash
+$ curl http://localhost:3000/discount?itemid=10
+{"discount": {"dropoff_percent": 12}}
 ```

@@ -21,5 +21,5 @@ use App\Handler\Item;
  * $app->route('/contact', App\Handler\ContactHandler::class, ['GET', 'POST', ...], 'contact');
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
-    $app->get('/item/{id:\d+}', Item::class);
+    $app->get('/item', Item::class);
 };
