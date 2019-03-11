@@ -16,7 +16,6 @@ const client = new MongoClient(url, { useNewUrlParser: true });
 
 
 app.get("/discount", function(req, res, next) {
-// Use connect method to connect to the Server
   client.connect(function(err) {
     db = client.db(dbName);
       db.collection('discount').find({}).toArray(function(err, discounts) {
@@ -24,11 +23,19 @@ app.get("/discount", function(req, res, next) {
         discounts.forEach(function (s) {
           if (s.itemID+"" == req.query.itemid) {
             res.send({"discount": {s}})
+            return
           }
-      });
+        });
+        res.status(404).send({ error: 'Discount not found' });
+        return
     })
     client.close();
   });
+});
+
+app.use(function(req, res, next){
+  res.status(404)
+  res.send({ error: 'Route Not found' });
 });
 
 app.listen(3000, () => {
