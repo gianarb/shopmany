@@ -34,7 +34,7 @@ docker-compose up discount
 Check it out
 
 ```bash
-$ curl http://localhost:3000/discount?itemid=10
+$ curl http://localhost:3003/discount?itemid=10
 {"discount": {"dropoff_percent": 12}}
 ```
 
@@ -50,4 +50,14 @@ docker-compose up pay
 Check it out
 ```
 $ curl http://localhost:3002:/pay
+```
+
+## Frontend
+Frontend is an HTMP/CSS/JS application with a Go backend and is used a
+frontend for the ecommerce.
+```
+docker-compose up frontend
+```
+
+Check it out `http://localhost:3000` using your browser
 ```

@@ -1,8 +1,8 @@
 version: '3.3'
 
 services:
+  # item is the service that lists the available items with their price.
   item:
-     #docker run -d -p 80:80 --name my-apache-php-app -v "$PWD":/var/www/html php:7.2-apache
     restart: always
     build:
       context: ./build/docker/item
@@ -17,21 +17,17 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'shopmany'
-      # So you don't have to use root, but you can if you like
       MYSQL_USER: 'hello'
-      # You can use whatever password you like
       MYSQL_PASSWORD: 'ciao'
-      # Password for root access
       MYSQL_ROOT_PASSWORD: 'root'
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
     expose:
-      # Opens port 3306 on the container
       - '3306'
-      # Where our data will be persisted
     volumes:
       - ./items/db.sql:/docker-entrypoint-initdb.d/dump.sql
+
+  # it manages the discouts available for every item.
   discount:
     image: node:10.15.3-stretch
     working_dir: /usr/src/app
@@ -39,13 +35,11 @@ services:
       - ./discount:/usr/src/app
     command: ["node", "./server.js"]
     ports:
-      - '3000:3000'
+      - '3003:3000'
     depends_on:
       - discountdb
   discountdb:
     image: mongo:4.0.6-xenial
-    #build:
-      #context: ./build/docker/discountdb
     restart: always
     environment:
       MONGO_INITDB_DATABASE: "shopmany"
@@ -54,8 +48,23 @@ services:
     volumes:
       - ./discount/init:/docker-entrypoint-initdb.d
 
+  # pay is a java app that handles items purchase
   pay:
     build:
       context: ./pay
     ports:
       - '3002:8080'
+
+  # frontend is the ui of the project
+  frontend:
+    image: golang:1.12.0-stretch
+    command: ["go", "run", "./main.go"]
+    ports:
+      - '3000:3000'
+    volumes:
+      - "./frontend:/opt/app"
+    working_dir: "/opt/app"
+    depends_on:
+      - item
+      - pay
+      - discount
