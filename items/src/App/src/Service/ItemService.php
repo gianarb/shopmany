@@ -24,6 +24,7 @@ class ItemService {
             $i = new Item();
             $i->id = $row[0];
             $i->name = $row[1];
+            $i->price = $row[2];
             $items[] = $i;
         }
         return $items;

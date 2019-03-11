@@ -5,7 +5,7 @@ services:
   item:
     restart: always
     build:
-      context: ./build/docker/item
+      context: ./items
     ports:
       - '3001:80'
     volumes:
