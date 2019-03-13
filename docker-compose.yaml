@@ -20,8 +20,6 @@ services:
       MYSQL_USER: 'hello'
       MYSQL_PASSWORD: 'ciao'
       MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      - '3306:3306'
     expose:
       - '3306'
     volumes:
@@ -54,6 +52,21 @@ services:
       context: ./pay
     ports:
       - '3002:8080'
+    depends_on:
+      - paydb
+
+  paydb:
+    image: mysql:5.7.25
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'pay'
+      MYSQL_USER: 'howdy'
+      MYSQL_PASSWORD: 'hellohello'
+      MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - '3306'
+    volumes:
+      - ./pay/db.sql:/docker-entrypoint-initdb.d/dump.sql
 
   # frontend is the ui of the project
   frontend:
