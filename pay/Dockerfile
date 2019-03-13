@@ -1,6 +1,6 @@
-FROM openjdk:8-jdk-alpine
+FROM gradle:5.2.1-jdk8
 COPY . /opt/app
 WORKDIR /opt/app
-RUN apk add --update gradle
-RUN gradle build
+USER root
+RUN gradle build --no-daemon --console plain
 CMD ["java", "-jar","build/libs/pay-0.0.1.jar"]
