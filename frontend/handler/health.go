@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.uber.org/zap"
 )
 
 const unhealthy = "unhealty"
@@ -24,15 +25,22 @@ type check struct {
 }
 
 func NewHealthHandler(config config.Config, hclient *http.Client) *healthHandler {
+	logger, _ := zap.NewProduction()
 	return &healthHandler{
 		config:  config,
 		hclient: hclient,
+		logger:  logger,
 	}
 }
 
 type healthHandler struct {
 	config  config.Config
 	hclient *http.Client
+	logger  *zap.Logger
+}
+
+func (h *healthHandler) WithLogger(logger *zap.Logger) {
+	h.logger = logger
 }
 
 func (h *healthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -51,6 +59,7 @@ func (h *healthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	body, err := json.Marshal(b)
 	if err != nil {
+		h.logger.Error(err.Error())
 		w.WriteHeader(500)
 	}
 	if b.Status == unhealthy {
