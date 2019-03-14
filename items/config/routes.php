@@ -6,6 +6,7 @@ use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\MiddlewareFactory;
 use App\Handler\Item;
+use App\Handler\Health;
 
 /**
  * Setup routes with a single request method:
@@ -22,4 +23,5 @@ use App\Handler\Item;
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/item', Item::class);
+    $app->get('/health', Health::class);
 };

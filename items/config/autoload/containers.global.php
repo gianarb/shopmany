@@ -14,12 +14,12 @@ return [
         // not require arguments to the constructor. Map a service name to the
         // class name.
         'invokables' => [
-            // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories'  => [
             App\Service\ItemService::class => App\Service\ItemServiceFactory::class,
             App\Handler\Item::class => App\Handler\ItemFactory::class,
+            App\Handler\Health::class => App\Handler\HealthFactory::class,
         ],
     ],
 ];
