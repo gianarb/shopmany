@@ -3,6 +3,8 @@ namespace App\Service;
 
 use App\Model\Item;
 use \PDO;
+use OpenTracing\GlobalTracer;
+use OpenTracing\Formats;
 
 class ItemService {
 
@@ -18,7 +20,18 @@ class ItemService {
      * list returns all the items
      */
     public function list() {
+        $spanContext = GlobalTracer::get()->extract(
+            Formats\HTTP_HEADERS,
+            getallheaders()
+        );
+        $spanOpt = [];
+        if ($spanContext != null) {
+            $spanOpt['child_of'] = $spanContext;
+        }
+        $span = GlobalTracer::get()->startSpan("mysql.select_items", $spanOpt);
+
         $q = $this->pdo->query("SELECT * FROM item");
+        $span->setTag("query", $q->queryString);
         $items = [];
         while ($row = $q->fetch()) {
             $i = new Item();
@@ -28,6 +41,7 @@ class ItemService {
             $i->price = $row[3];
             $items[] = $i;
         }
+        $span->finish();
         return $items;
     }
 }
