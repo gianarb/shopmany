@@ -5,18 +5,26 @@ import (
 	"net/http"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.uber.org/zap"
 )
 
 type payHandler struct {
 	config  config.Config
 	hclient *http.Client
+	logger  *zap.Logger
 }
 
 func NewPayHandler(config config.Config, hclient *http.Client) *payHandler {
+	logger, _ := zap.NewProduction()
 	return &payHandler{
 		config:  config,
 		hclient: hclient,
+		logger:  logger,
 	}
+}
+
+func (h *payHandler) WithLogger(logger *zap.Logger) {
+	h.logger = logger
 }
 
 func (h *payHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
