@@ -74,6 +74,10 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
             'Prophecy\\' => 9,
             'PackageVersions\\' => 16,
         ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
         'I' => 
         array (
             'Interop\\Http\\Server\\' => 20,
@@ -225,6 +229,10 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'PackageVersions\\' => 
         array (
             0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'Interop\\Http\\Server\\' => 
         array (

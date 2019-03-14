@@ -24,12 +24,14 @@ final class Versions
   'container-interop/container-interop' => '1.2.0@79cbf1341c22ec75643d841642dd5d6acd83bdb8',
   'fig/http-message-util' => '1.1.4@3242caa9da7221a304b8f84eb9eaddae0a7cf422',
   'http-interop/http-middleware' => '0.5.0@b49e1f9f6c584e704317b563302e566b8ce11858',
+  'monolog/monolog' => '1.24.0@bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266',
   'nikic/fast-route' => 'v1.3.0@181d480e08d9476e61381e04a71b34dc0432e812',
   'psr/container' => '1.0.0@b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
   'psr/http-factory' => '1.0.1@12ac7fcd07e5b077433f5f2bee95b3a771bf61be',
   'psr/http-message' => '1.0.1@f6561bf28d520154e4b0ec72be95418abe6d9363',
   'psr/http-server-handler' => '1.0.1@aff2f80e33b7f026ec96bb42f63242dc50ffcae7',
   'psr/http-server-middleware' => '1.0.1@2296f45510945530b9dceb8bcedb5cb84d40c5f5',
+  'psr/log' => '1.1.2@446d54b4cb6bf489fc9d75f55843658e6f25d801',
   'zendframework/zend-component-installer' => '2.1.2@56871c43e40f92324b25d5a4d50ff51f9f556910',
   'zendframework/zend-config-aggregator' => '1.2.0@8f8568e8a618684c3bd778df75f5bc757b76decd',
   'zendframework/zend-diactoros' => '2.2.1@de5847b068362a88684a55b0dbb40d85986cfa52',
@@ -59,7 +61,6 @@ final class Versions
   'phpunit/php-timer' => '2.1.2@1038454804406b0b5f5f520358e78c1c2f71501e',
   'phpunit/php-token-stream' => '3.1.1@995192df77f63a59e47f025390d2d1fdf8f425ff',
   'phpunit/phpunit' => '7.5.20@9467db479d1b0487c99733bb1e7944d32deded2c',
-  'psr/log' => '1.1.2@446d54b4cb6bf489fc9d75f55843658e6f25d801',
   'roave/security-advisories' => 'dev-master@f0eca1ac3194cc94726f0bb366672f38629272b4',
   'sebastian/code-unit-reverse-lookup' => '1.0.1@4419fcdb5eabb9caa61a27c7a1db532a6b55dd18',
   'sebastian/comparator' => '3.0.2@5de4fc177adf9bce8df98d8d141a7559d7ccf6da',
@@ -85,7 +86,7 @@ final class Versions
   'zendframework/zend-expressive-tooling' => '1.3.0@944f4fecc292a7aab3d7531b01d9f8c4fafa8b8d',
   'zfcampus/zf-composer-autoloading' => '2.1.0@537145efec53c784ddc06f1af93102ddede52ceb',
   'zfcampus/zf-development-mode' => '3.2.0@419004a320bab017d28f2bc5e7857dde7e19aecf',
-  'zendframework/zend-expressive-skeleton' => 'dev-master@9765eb8df103a9b48990aacc56ed9a9c30977552',
+  'zendframework/zend-expressive-skeleton' => 'No version set (parsed as 1.0.0)@',
 );
 
     private function __construct()
