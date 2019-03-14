@@ -9,6 +9,7 @@ class ItemFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        return new Item($container->get(ItemService::class));
+        $h = new Item($container->get(ItemService::class));
+        return $h;
     }
 }
