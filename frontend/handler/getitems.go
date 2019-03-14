@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.uber.org/zap"
 )
 
 type ItemsResponse struct {
@@ -62,13 +63,20 @@ func getDiscountPerItem(ctx context.Context, hclient *http.Client, itemID int, d
 type getItemsHandler struct {
 	config  config.Config
 	hclient *http.Client
+	logger  *zap.Logger
 }
 
 func NewGetItemsHandler(config config.Config, hclient *http.Client) *getItemsHandler {
+	logger, _ := zap.NewProduction()
 	return &getItemsHandler{
 		config:  config,
 		hclient: hclient,
+		logger:  logger,
 	}
+}
+
+func (h *getItemsHandler) WithLogger(logger *zap.Logger) {
+	h.logger = logger
 }
 
 func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -76,13 +84,20 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/item", h.config.ItemHost), nil)
 	if err != nil {
+		h.logger.Error(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
 	resp, err := h.hclient.Do(req)
+	if err != nil {
+		h.logger.Error(err.Error())
+		http.Error(w, err.Error(), 500)
+		return
+	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		h.logger.Error(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
@@ -91,6 +106,7 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	err = json.Unmarshal(body, &items)
 	if err != nil {
+		h.logger.Error(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
@@ -98,6 +114,7 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	for k, item := range items.Items {
 		d, err := getDiscountPerItem(ctx, h.hclient, item.ID, h.config.DiscountHost)
 		if err != nil {
+			h.logger.Error(err.Error())
 			http.Error(w, err.Error(), 500)
 			continue
 		}
@@ -106,6 +123,7 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	b, err := json.Marshal(items)
 	if err != nil {
+		h.logger.Error(err.Error())
 		http.Error(w, err.Error(), 500)
 		return
 	}
