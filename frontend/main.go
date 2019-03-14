@@ -28,6 +28,7 @@ func main() {
 	http.Handle("/", fs)
 	http.Handle("/api/items", handler.NewGetItemsHandler(config, httpClient))
 	http.Handle("/api/pay", handler.NewPayHandler(config, httpClient))
+	http.Handle("/health", handler.NewHealthHandler(config, httpClient))
 
 	log.Println("Listening on port 3000...")
 	http.ListenAndServe(":3000", nil)
