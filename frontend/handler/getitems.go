@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	opentracing "github.com/opentracing/opentracing-go"
 	"go.uber.org/zap"
 )
 
@@ -36,6 +37,13 @@ func getDiscountPerItem(ctx context.Context, hclient *http.Client, itemID int, d
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/discount", discountHost), nil)
 	if err != nil {
 		return 0, err
+	}
+	req.WithContext(ctx)
+	if span := opentracing.SpanFromContext(ctx); span != nil {
+		opentracing.GlobalTracer().Inject(
+			span.Context(),
+			opentracing.HTTPHeaders,
+			opentracing.HTTPHeadersCarrier(req.Header))
 	}
 	q := req.URL.Query()
 	q.Add("itemid", strconv.Itoa(itemID))
@@ -88,6 +96,14 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	req.WithContext(ctx)
+	if span := opentracing.SpanFromContext(r.Context()); span != nil {
+		opentracing.GlobalTracer().Inject(
+			span.Context(),
+			opentracing.HTTPHeaders,
+			opentracing.HTTPHeadersCarrier(req.Header))
+	}
+
 	resp, err := h.hclient.Do(req)
 	if err != nil {
 		h.logger.Error(err.Error())
