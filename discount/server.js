@@ -8,6 +8,28 @@ const dbName = 'shopmany';
 const client = new MongoClient(url, { useNewUrlParser: true });
 app.use(errorHandler)
 
+app.get("/health", function(req, res, next) {
+  var resbody = {
+    "status": "healthy",
+    checks: [],
+  };
+  var resCode = 200;
+
+  client.connect(function(err) {
+    var mongoCheck = {
+      "name": "mongo",
+      "status": "healthy",
+    };
+    if (err != null) {
+      mongoCheck.error = err.toString();
+      mongoCheck.status = "unhealthy";
+      resbody.status = "unhealthy"
+      resCode = 500;
+    }
+    resbody.checks.push(mongoCheck);
+    res.status(resCode).json(resbody)
+  });
+});
 
 app.get("/discount", function(req, res, next) {
   client.connect(function(err) {
