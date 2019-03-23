@@ -5,10 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
 @RestController
 public class Application {
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
     private PayRepository payRepository;
 
     public Application(PayRepository payRepository) {
@@ -40,6 +43,7 @@ public class Application {
             status = "healthy";
             mysqlC.setStatus("healthy");
         } catch (Exception e) {
+            logger.error("Mysql healthcheck failed", e.getMessage());
             mysqlC.setStatus("unhealthy");
             mysqlC.setError(e.getMessage());
             response.setStatus(500);
