@@ -90,7 +90,7 @@ services:
   # frontend is the ui of the project
   frontend:
     image: golang:1.14.0-stretch
-    command: ["go", "run", "-mod", "vendor", "./main.go"]
+    command: ["go", "run", "-mod", "vendor", "./main.go", "--tracer", "jaeger", "--tracer-jaeger-address", "http://jaeger:14268/api/traces"]
     ports:
       - '3000:3000'
     volumes:
