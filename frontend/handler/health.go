@@ -1,12 +1,14 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.opentelemetry.io/otel/plugin/httptrace"
 	"go.uber.org/zap"
 )
 
@@ -50,7 +52,7 @@ func (h *healthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Content-Type", "application/json")
 
-	itemCheck := checkItem(h.config.ItemHost, h.hclient)
+	itemCheck := checkItem(r.Context(), h.config.ItemHost, h.hclient)
 	if itemCheck.Status == healthy {
 		b.Status = healthy
 	}
@@ -68,13 +70,15 @@ func (h *healthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(body))
 }
 
-func checkItem(host string, hclient *http.Client) check {
+func checkItem(ctx context.Context, host string, hclient *http.Client) check {
 	c := check{
 		Name:   "item",
 		Error:  "",
 		Status: unhealthy,
 	}
 	req, _ := http.NewRequest("GET", fmt.Sprintf("%s/health", host), nil)
+	ctx, req = httptrace.W3C(ctx, req)
+	httptrace.Inject(ctx, req)
 	resp, err := hclient.Do(req)
 	if err != nil {
 		c.Error = err.Error()

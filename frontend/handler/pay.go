@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.opentelemetry.io/otel/plugin/httptrace"
 	"go.uber.org/zap"
 )
 
@@ -38,6 +39,8 @@ func (h *payHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	ctx, req := httptrace.W3C(r.Context(), req)
+	httptrace.Inject(ctx, req)
 	req.Header.Add("Content-Type", "application/json")
 	resp, err := h.hclient.Do(req)
 	if err != nil {

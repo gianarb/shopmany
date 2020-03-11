@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.opentelemetry.io/otel/plugin/httptrace"
 	"go.uber.org/zap"
 )
 
@@ -40,6 +41,9 @@ func getDiscountPerItem(ctx context.Context, hclient *http.Client, itemID int, d
 	q := req.URL.Query()
 	q.Add("itemid", strconv.Itoa(itemID))
 	req.URL.RawQuery = q.Encode()
+	ctx, req = httptrace.W3C(ctx, req)
+	httptrace.Inject(ctx, req)
+
 	resp, err := hclient.Do(req)
 	if err != nil {
 		return 0, err
@@ -88,6 +92,8 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	ctx, req = httptrace.W3C(ctx, req)
+	httptrace.Inject(ctx, req)
 	resp, err := h.hclient.Do(req)
 	if err != nil {
 		h.logger.Error(err.Error())
