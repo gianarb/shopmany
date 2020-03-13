@@ -21,7 +21,9 @@ return [
             App\Handler\Item::class => App\Handler\ItemFactory::class,
             App\Handler\Health::class => App\Handler\HealthFactory::class,
             "Logger" => App\Service\LoggerFactory::class,
+            "Tracer" => App\Service\TracerFactory::class,
             App\Middleware\LoggerMiddleware::class => App\Middleware\LoggerMiddlewareFactory::class,
+            App\Middleware\TracerMiddleware::class => App\Middleware\TracerMiddlewareFactory::class,
         ],
     ],
 ];

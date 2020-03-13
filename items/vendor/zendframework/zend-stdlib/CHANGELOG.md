@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.3.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.2.2 - TBD
+
+### Added
+
+- [#96](https://github.com/zendframework/zend-stdlib/pull/96) Added PHP 7.3 support
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.2.1 - 2018-08-28
 
 ### Added

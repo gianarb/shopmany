@@ -1,0 +1,6 @@
+.tmp/
+doc/html/
+vendor/
+zf-mkdoc-theme/
+/test/TestAsset/.cache/
+phpunit.xml

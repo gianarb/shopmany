@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.3.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 2.2.2 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.2.1 - 2019-11-13
 
 ### Added
@@ -347,6 +391,30 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - Nothing.
+
+## 1.8.7 - 2019-08-06
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#364](https://github.com/zendframework/zend-diactoros/issues/364) modifies detection of HTTPS schemas via the `$_SERVER['HTTPS']` value
+  such that an empty HTTPS-key will result in a scheme of `http` and not
+  `https`.
 
 ## 1.8.6 - 2018-09-05
 

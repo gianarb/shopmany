@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
+class ComposerStaticInitf6fb6c8cad502611edf7efee8ce543f7
 {
     public static $files = array (
         'cf97c57bfe0f23854afd2f3818abb7a0' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/functions/create_uploaded_file.php',
@@ -19,11 +19,22 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         '968cb91a78f08ea033c0e1afe256c864' => __DIR__ . '/..' . '/zendframework/zend-stratigility/src/functions/host.php',
         '73f02b5e05532acfb968fa91193a3d17' => __DIR__ . '/..' . '/zendframework/zend-stratigility/src/functions/middleware.php',
         '7ba36b1c7d480f53d620df374623203a' => __DIR__ . '/..' . '/zendframework/zend-stratigility/src/functions/path.php',
-        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'ff1b7935a93a4a9517db3ebe0533892a' => __DIR__ . '/..' . '/opentracing/opentracing/src/OpenTracing/Tags.php',
+        '0db36546c71c357f5ee70c39bb03966f' => __DIR__ . '/..' . '/opentracing/opentracing/src/OpenTracing/Formats.php',
+        '198ca788260cba849b8d9061ef2afeb7' => __DIR__ . '/..' . '/openzipkin/zipkin/src/Zipkin/Propagation/Id.php',
+        '1078d5a0858ccde97f683b735c9f5473' => __DIR__ . '/..' . '/openzipkin/zipkin/src/Zipkin/Timestamp.php',
+        '948c9b6b6a769d2db468357f07afb9ed' => __DIR__ . '/..' . '/openzipkin/zipkin/src/Zipkin/Kind.php',
+        'f99ca7ab6b69ea13de674def3146fa4b' => __DIR__ . '/..' . '/openzipkin/zipkin/src/Zipkin/Tags.php',
+        '809f512612033e8c2eaab5c48aa38d39' => __DIR__ . '/..' . '/openzipkin/zipkin/src/Zipkin/Annotations.php',
         'f0e119a83772115c43c01dd050fd77a8' => __DIR__ . '/..' . '/zendframework/zend-expressive/src/constants.php',
     );
 
@@ -34,6 +45,8 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         ),
         'Z' => 
         array (
+            'Zipkin\\' => 7,
+            'ZipkinOpenTracing\\' => 18,
             'Zend\\Stratigility\\' => 18,
             'Zend\\Stdlib\\' => 12,
             'Zend\\ServiceManager\\' => 20,
@@ -59,10 +72,14 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Php73\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
+            'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Console\\' => 26,
         ),
         'P' => 
@@ -73,6 +90,10 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
             'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
             'PackageVersions\\' => 16,
+        ),
+        'O' => 
+        array (
+            'OpenTracing\\' => 12,
         ),
         'M' => 
         array (
@@ -106,6 +127,14 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Zipkin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/openzipkin/zipkin/src/Zipkin',
+        ),
+        'ZipkinOpenTracing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jcchavezs/zipkin-opentracing/src/ZipkinOpenTracing',
         ),
         'Zend\\Stratigility\\' => 
         array (
@@ -184,6 +213,10 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
         'Symfony\\Polyfill\\Php73\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
@@ -192,6 +225,14 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
+        ),
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
+        ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
@@ -199,6 +240,10 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'Symfony\\Contracts\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Component\\String\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/string',
         ),
         'Symfony\\Component\\Console\\' => 
         array (
@@ -229,6 +274,10 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'PackageVersions\\' => 
         array (
             0 => __DIR__ . '/..' . '/ocramius/package-versions/src/PackageVersions',
+        ),
+        'OpenTracing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/opentracing/opentracing/src/OpenTracing',
         ),
         'Monolog\\' => 
         array (
@@ -348,6 +397,7 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'MySource_Sniffs_PHP_GetRequestDataSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/PHP/GetRequestDataSniff.php',
         'MySource_Sniffs_PHP_ReturnFunctionValueSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/PHP/ReturnFunctionValueSniff.php',
         'MySource_Sniffs_Strings_JoinStringsSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/Strings/JoinStringsSniff.php',
+        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PEAR_Sniffs_Classes_ClassDeclarationSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PEAR/Sniffs/Classes/ClassDeclarationSniff.php',
         'PEAR_Sniffs_Commenting_ClassCommentSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PEAR/Sniffs/Commenting/ClassCommentSniff.php',
         'PEAR_Sniffs_Commenting_FileCommentSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PEAR/Sniffs/Commenting/FileCommentSniff.php',
@@ -809,6 +859,7 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'PharIo\\Manifest\\CopyrightElement' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/CopyrightElement.php',
         'PharIo\\Manifest\\CopyrightInformation' => __DIR__ . '/..' . '/phar-io/manifest/src/values/CopyrightInformation.php',
         'PharIo\\Manifest\\ElementCollection' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/ElementCollection.php',
+        'PharIo\\Manifest\\ElementCollectionException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ElementCollectionException.php',
         'PharIo\\Manifest\\Email' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Email.php',
         'PharIo\\Manifest\\Exception' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/Exception.php',
         'PharIo\\Manifest\\ExtElement' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/ExtElement.php',
@@ -824,7 +875,7 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'PharIo\\Manifest\\Manifest' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Manifest.php',
         'PharIo\\Manifest\\ManifestDocument' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/ManifestDocument.php',
         'PharIo\\Manifest\\ManifestDocumentException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ManifestDocumentException.php',
-        'PharIo\\Manifest\\ManifestDocumentLoadingException' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/ManifestDocumentLoadingException.php',
+        'PharIo\\Manifest\\ManifestDocumentLoadingException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ManifestDocumentLoadingException.php',
         'PharIo\\Manifest\\ManifestDocumentMapper' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestDocumentMapper.php',
         'PharIo\\Manifest\\ManifestDocumentMapperException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ManifestDocumentMapperException.php',
         'PharIo\\Manifest\\ManifestElement' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/ManifestElement.php',
@@ -1058,6 +1109,7 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'Squiz_Sniffs_WhiteSpace_ScopeKeywordSpacingSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Squiz/Sniffs/WhiteSpace/ScopeKeywordSpacingSniff.php',
         'Squiz_Sniffs_WhiteSpace_SemicolonSpacingSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Squiz/Sniffs/WhiteSpace/SemicolonSpacingSniff.php',
         'Squiz_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Squiz/Sniffs/WhiteSpace/SuperfluousWhitespaceSniff.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
@@ -1067,6 +1119,7 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Zend_Sniffs_Debug_CodeAnalyzerSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Zend/Sniffs/Debug/CodeAnalyzerSniff.php',
         'Zend_Sniffs_Files_ClosingTagSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Zend/Sniffs/Files/ClosingTagSniff.php',
         'Zend_Sniffs_NamingConventions_ValidVariableNameSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Zend/Sniffs/NamingConventions/ValidVariableNameSniff.php',
@@ -1075,9 +1128,9 @@ class ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitbc4c087d6ea404b25bacafa363a480dc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf6fb6c8cad502611edf7efee8ce543f7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf6fb6c8cad502611edf7efee8ce543f7::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf6fb6c8cad502611edf7efee8ce543f7::$classMap;
 
         }, null, ClassLoader::class);
     }
