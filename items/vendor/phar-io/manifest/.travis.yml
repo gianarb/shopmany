@@ -3,6 +3,11 @@ os:
 
 language: php
 
+addons:
+  apt:
+    packages:
+      - ant
+
 before_install:
   - wget https://phar.io/releases/phive.phar
   - wget https://phar.io/releases/phive.phar.asc
@@ -14,14 +19,16 @@ before_install:
 install:
   - ant setup
 
-script: ./tools/phpunit
+script:
+  - ant test
 
 php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.0snapshot
-  - 7.1snapshot
+  - 7.2
+  - 7.3
+  - 7.4
+  - 7.2snapshot
+  - 7.3snapshot
+  - 7.4snapshot
   - master
 
 matrix:

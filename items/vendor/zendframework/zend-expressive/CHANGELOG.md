@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.3.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.2.2 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#663](https://github.com/zendframework/zend-expressive/pull/663) fixes parameter
+  types in docblock for `Zend\Expressive\MiddlewareFactory::pipeline()`
+
 ## 3.2.1 - 2018-11-08
 
 ### Added

@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.2.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 2.1.3 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.1.2 - 2019-09-04
 
 ### Added
@@ -468,7 +512,7 @@ tagged releases now make more sense, as plugins are installed via composer
   - to act as a Composer plugin.
   - to add awareness of additional configuration locations:
     - `modules.config.php` (Apigility)
-    - `development.config.php` (zend-development-mode)
+    - `development.config.php` (zf-development-mode)
     - `config.php` (Expressive with expressive-config-manager)
   - to discover and prompt for known configuration locations when installing a
     package.

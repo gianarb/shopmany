@@ -15,12 +15,14 @@ use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
 use Zend\Expressive\Router\Middleware\RouteMiddleware;
 use Zend\Stratigility\Middleware\ErrorHandler;
 use App\Middleware\LoggerMiddleware;
+use App\Middleware\TracerMiddleware;
 
 /**
  * Setup middleware pipeline:
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->pipe($container->get(LoggerMiddleware::class));
+    $app->pipe($container->get(TracerMiddleware::class));
     // The error handler should be the first (most outer) middleware to catch
     // all Exceptions.
     $app->pipe(ErrorHandler::class);

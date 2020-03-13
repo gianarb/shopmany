@@ -15,4 +15,9 @@ return [
         "user" => "root",
         "pass" => "root",
     ],
+    "zipkin" => [
+        "serviceName" => 'items',
+        "host" => 'http://zipkin',
+        "port" => 9411,
+    ],
 ];
