@@ -23,7 +23,7 @@ use Throwable;
 /**
  * A TestSuite is a composite of Tests. It runs a collection of test cases.
  */
-class TestSuite implements Test, SelfDescribing, IteratorAggregate
+class TestSuite implements IteratorAggregate, SelfDescribing, Test
 {
     /**
      * Enable or disable the backup and restoration of the $GLOBALS array.
@@ -61,7 +61,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
     /**
      * The tests in the test suite.
      *
-     * @var TestCase[]
+     * @var Test[]
      */
     protected $tests = [];
 
@@ -758,11 +758,13 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
         } catch (Throwable $t) {
             $message = "Exception in {$this->name}::$afterClassMethod" . \PHP_EOL . $t->getMessage();
             $error   = new SyntheticError($message, 0, $t->getFile(), $t->getLine(), $t->getTrace());
-            $test    = new \Failure($afterClassMethod);
 
-            $result->startTest($test);
-            $result->addFailure($test, $error, 0);
-            $result->endTest($test, 0);
+            $placeholderTest = clone $test;
+            $placeholderTest->setName($afterClassMethod);
+
+            $result->startTest($placeholderTest);
+            $result->addFailure($placeholderTest, $error, 0);
+            $result->endTest($placeholderTest, 0);
         }
 
         $this->tearDown();
@@ -798,6 +800,8 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
 
     /**
      * Returns the tests as an enumeration.
+     *
+     * @return Test[]
      */
     public function tests(): array
     {
@@ -806,6 +810,8 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
 
     /**
      * Set tests of the test suite
+     *
+     * @param Test[] $tests
      */
     public function setTests(array $tests): void
     {

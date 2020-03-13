@@ -2,6 +2,82 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.3.0 - 2019-11-22
+
+### Added
+
+- [#96](https://github.com/zendframework/zend-expressive-tooling/pull/96) adds
+  compatibility with symfony/console `^5.0`.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 1.2.1 - 2019-08-28
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#93](https://github.com/zendframework/zend-expressive-tooling/pull/93) fixes
+  issue with DI containers where configuration is an ArrayObject not an array.
+  `handler:create` command works now properly with `Aura.Di` and `Symfony DI` containers.
+
+## 1.2.0 - 2019-03-05
+
+### Added
+
+- [#85](https://github.com/zendframework/zend-expressive-tooling/pull/85) adds support for PHP 7.3.
+
+- [#86](https://github.com/zendframework/zend-expressive-tooling/pull/86) adds the ability to provide the `--modules-path` option to the various
+  `module:*` commands via configuration. In each case, if the option is omitted,
+  the command will search for a `Zend\Expressive\Tooling\Module\CommandCommonOptions.--modules-path`
+  configuration entry, and use it if present. When present, calling any of these
+  commands can now omit the `--modules-path` option when a custom path is
+  required.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.1.0 - 2019-01-22
 
 ### Added

@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 5.3.0 - 2019-03-12
+
+### Added
+
+- [#70](https://github.com/zendframework/zend-expressive-helpers/pull/70) adds `Zend\Expressive\Helper\Template\TemplateVariableContainer`, which
+  can be used to aggregate template variables within a pipeline, and as a
+  stateless alternative to using `TemplateRendererInterface::addDefaultParam()`.
+  Please review the `README.me` for more details.
+
+- [#70](https://github.com/zendframework/zend-expressive-helpers/pull/70) adds `Zend\Expressive\Helper\Template\TemplateVariableContainerMiddleware`,
+  which will register an empty `TemplateVariableContainer` under that class's name
+  as a request attribute, if one is not already present.
+
+- [#70](https://github.com/zendframework/zend-expressive-helpers/pull/70) adds `Zend\Expressive\Helper\Template\RouteTemplateVariableMiddleware`,
+  which will register the return value of any discovered `Zend\Expressive\Router\RouteResult`
+  request attribute as the "route" variable of a `TemplateVariableContainer`
+  request attribute, when present. This middleware can be used in place of the
+  `UrlHelperMiddleware`, as long as you **always** provide the route name to the
+  `UrlHelper`.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 5.2.0 - 2019-03-12
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#71](https://github.com/zendframework/zend-expressive-helpers/pull/71) changes the visibility of `Zend\Expressive\UrlHelper::getRouteResult()` to
+  `public`, allowing it to be consulted in order to retrieve the matched route
+  name and route parameters.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 5.1.3 - 2019-02-27
 
 ### Added
