@@ -17,7 +17,6 @@ return [
     ],
     "zipkin" => [
         "serviceName" => 'items',
-        "host" => 'http://zipkin',
-        "port" => 9411,
+        "reporterURL" => 'http://zipkin:9411/api/v2/spans',
     ],
 ];

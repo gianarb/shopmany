@@ -64,7 +64,7 @@ final class Versions
   'phpunit/php-timer' => '2.1.2@1038454804406b0b5f5f520358e78c1c2f71501e',
   'phpunit/php-token-stream' => '3.1.1@995192df77f63a59e47f025390d2d1fdf8f425ff',
   'phpunit/phpunit' => '7.5.20@9467db479d1b0487c99733bb1e7944d32deded2c',
-  'roave/security-advisories' => 'dev-master@f0eca1ac3194cc94726f0bb366672f38629272b4',
+  'roave/security-advisories' => 'dev-master@b68e249f4348e45a501e2e6f591e79e61b70453c',
   'sebastian/code-unit-reverse-lookup' => '1.0.1@4419fcdb5eabb9caa61a27c7a1db532a6b55dd18',
   'sebastian/comparator' => '3.0.2@5de4fc177adf9bce8df98d8d141a7559d7ccf6da',
   'sebastian/diff' => '3.0.2@720fcc7e9b5cf384ea68d9d930d480907a0c1a29',
@@ -93,7 +93,7 @@ final class Versions
   'zendframework/zend-expressive-tooling' => 'dev-develop@08c42479be76511b2fb2de52bca1dc6f29b4d6bd',
   'zfcampus/zf-composer-autoloading' => 'dev-develop@ea63c17532a48fdf9a22c73d3181aad589e2cbd7',
   'zfcampus/zf-development-mode' => 'dev-develop@ab2e10e5382e533002958f1c26100b2bc018bcdb',
-  'zendframework/zend-expressive-skeleton' => 'No version set (parsed as 1.0.0)@',
+  'zendframework/zend-expressive-skeleton' => 'dev-items/opentelemetry@9def0ad70936d4e540e4cba95f0875c59274e58a',
 );
 
     private function __construct()

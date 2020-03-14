@@ -2,12 +2,13 @@
 namespace App\Middleware;
 
 use ErrorException;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use OpenTracing\Formats;
+use OpenTracing\Tags;
 use OpenTracing\GlobalTracer;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 class TracerMiddleware implements MiddlewareInterface
 {
@@ -20,16 +21,26 @@ class TracerMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
     {
-        $spanContext = GlobalTracer::get()->extract(
+        $spanContext = $this->tracer->extract(
             Formats\HTTP_HEADERS,
-            getallheaders()
+            $request
         );
-        $span = GlobalTracer::get()->startSpan($request->getMethod().": ".$request->getUri()->getPath(), ['child_of' => $spanContext]);
+        $span = $this->tracer->startSpan($request->getMethod(), [
+            'child_of' => $spanContext,
+            'tags' => [
+                Tags\HTTP_METHOD => $request->getMethod(),
+                'http.path' => $request->getUri()->getPath(),
+            ]
+        ]);
+        
         try {
             $response = $handler->handle($request);
-        } catch (Throwable $e) {
+            $span->setTag(Tags\HTTP_STATUS_CODE, $response->getStatusCode());
+            return $response;
+        } catch (\Throwable $e) {
+            $span->setTag(Tags\ERROR, $e->getMessage());
+        } finally {
+            $span->finish();
         }
-        $span->finish();
-        return $response;
     }
 }
