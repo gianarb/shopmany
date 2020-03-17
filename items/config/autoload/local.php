@@ -15,4 +15,8 @@ return [
         "user" => "root",
         "pass" => "root",
     ],
+    "zipkin" => [
+        "serviceName" => 'items',
+        "reporterURL" => 'http://jaeger:9411/api/v2/spans',
+    ],
 ];

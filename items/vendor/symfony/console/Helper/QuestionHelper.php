@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\Console\Helper;
 
+use Symfony\Component\Console\Exception\MissingInputException;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -22,6 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Terminal;
+use function Symfony\Component\String\s;
 
 /**
  * The QuestionHelper class provides helpers to interact with the user.
@@ -48,44 +50,32 @@ class QuestionHelper extends Helper
         }
 
         if (!$input->isInteractive()) {
-            $default = $question->getDefault();
-
-            if (null === $default) {
-                return $default;
-            }
-
-            if ($validator = $question->getValidator()) {
-                return \call_user_func($question->getValidator(), $default);
-            } elseif ($question instanceof ChoiceQuestion) {
-                $choices = $question->getChoices();
-
-                if (!$question->isMultiselect()) {
-                    return isset($choices[$default]) ? $choices[$default] : $default;
-                }
-
-                $default = explode(',', $default);
-                foreach ($default as $k => $v) {
-                    $v = $question->isTrimmable() ? trim($v) : $v;
-                    $default[$k] = isset($choices[$v]) ? $choices[$v] : $v;
-                }
-            }
-
-            return $default;
+            return $this->getDefaultAnswer($question);
         }
 
         if ($input instanceof StreamableInputInterface && $stream = $input->getStream()) {
             $this->inputStream = $stream;
         }
 
-        if (!$question->getValidator()) {
-            return $this->doAsk($output, $question);
+        try {
+            if (!$question->getValidator()) {
+                return $this->doAsk($output, $question);
+            }
+
+            $interviewer = function () use ($output, $question) {
+                return $this->doAsk($output, $question);
+            };
+
+            return $this->validateAttempts($interviewer, $output, $question);
+        } catch (MissingInputException $exception) {
+            $input->setInteractive(false);
+
+            if (null === $fallbackOutput = $this->getDefaultAnswer($question)) {
+                throw $exception;
+            }
+
+            return $fallbackOutput;
         }
-
-        $interviewer = function () use ($output, $question) {
-            return $this->doAsk($output, $question);
-        };
-
-        return $this->validateAttempts($interviewer, $output, $question);
     }
 
     /**
@@ -134,7 +124,7 @@ class QuestionHelper extends Helper
             if (false === $ret) {
                 $ret = fgets($inputStream, 4096);
                 if (false === $ret) {
-                    throw new RuntimeException('Aborted.');
+                    throw new MissingInputException('Aborted.');
                 }
                 if ($question->isTrimmable()) {
                     $ret = trim($ret);
@@ -156,6 +146,36 @@ class QuestionHelper extends Helper
         }
 
         return $ret;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getDefaultAnswer(Question $question)
+    {
+        $default = $question->getDefault();
+
+        if (null === $default) {
+            return $default;
+        }
+
+        if ($validator = $question->getValidator()) {
+            return \call_user_func($question->getValidator(), $default);
+        } elseif ($question instanceof ChoiceQuestion) {
+            $choices = $question->getChoices();
+
+            if (!$question->isMultiselect()) {
+                return isset($choices[$default]) ? $choices[$default] : $default;
+            }
+
+            $default = explode(',', $default);
+            foreach ($default as $k => $v) {
+                $v = $question->isTrimmable() ? trim($v) : $v;
+                $default[$k] = isset($choices[$v]) ? $choices[$v] : $v;
+            }
+        }
+
+        return $default;
     }
 
     /**
@@ -238,13 +258,14 @@ class QuestionHelper extends Helper
             // as opposed to fgets(), fread() returns an empty string when the stream content is empty, not false.
             if (false === $c || ('' === $ret && '' === $c && null === $question->getDefault())) {
                 shell_exec(sprintf('stty %s', $sttyMode));
-                throw new RuntimeException('Aborted.');
+                throw new MissingInputException('Aborted.');
             } elseif ("\177" === $c) { // Backspace Character
                 if (0 === $numMatches && 0 !== $i) {
                     --$i;
-                    $fullChoice = self::substr($fullChoice, 0, $i);
                     // Move cursor backwards
-                    $output->write("\033[1D");
+                    $output->write(sprintf("\033[%dD", s($fullChoice)->slice(-1)->width(false)));
+
+                    $fullChoice = self::substr($fullChoice, 0, $i);
                 }
 
                 if (0 === $i) {
@@ -404,7 +425,7 @@ class QuestionHelper extends Helper
             shell_exec(sprintf('stty %s', $sttyMode));
 
             if (false === $value) {
-                throw new RuntimeException('Aborted.');
+                throw new MissingInputException('Aborted.');
             }
             if ($trimmable) {
                 $value = trim($value);
