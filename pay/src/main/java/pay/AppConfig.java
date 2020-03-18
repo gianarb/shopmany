@@ -10,5 +10,6 @@ public class AppConfig extends WebMvcConfigurerAdapter  {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
        registry.addInterceptor(new LoggerInterceptor());
+       registry.addInterceptor(new TracerInterceptor());
     }
 }
