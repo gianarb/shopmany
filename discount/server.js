@@ -1,20 +1,26 @@
-var express = require("express");
+'use strict';
 
+const url = process.env.DISCOUNT_MONGODB_URL || 'mongodb://discountdb:27017';
+const jaegerHost = process.env.JAEGER_HOST || 'jaeger';
+
+const logger = require('pino')()
+const tracer = require('./tracer')('discount', jaegerHost, logger);
+
+var express = require("express");
 var app = express();
 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://discountdb:27017';
 const dbName = 'shopmany';
 const client = new MongoClient(url, { useNewUrlParser: true });
-app.use(errorHandler)
 
-const logger = require('pino')()
 const expressPino = require('express-pino-logger')({
   logger: logger.child({"service": "httpd"})
 })
+
+//app.use(errorHandler)
 app.use(expressPino)
 
-app.get("/health", function(req, res, next) {
+app.get("/health", function(req, res) {
   var resbody = {
     "status": "healthy",
     checks: [],
@@ -40,7 +46,11 @@ app.get("/health", function(req, res, next) {
 
 app.get("/discount", function(req, res, next) {
   client.connect(function(err) {
-    db = client.db(dbName);
+    if (err != null) {
+      req.log.error(err.toString());
+      return next(err)
+    }
+    let db = client.db(dbName);
     db.collection('discount').find({}).toArray(function(err, discounts) {
       if (err != null) {
         req.log.error(err.toString());
@@ -63,12 +73,12 @@ app.get("/discount", function(req, res, next) {
   });
 });
 
-app.use(function(req, res, next) {
+app.use(function(req, res) {
   req.log.warn("route not found");
   return res.status(404).json({error: "route not found"});
 });
 
-function errorHandler(err, req, res, next) {
+function errorHandler(err, req, res) {
   req.log.error(err.toString(), {
     error_status: err.status
   });
