@@ -9,6 +9,9 @@ import (
 	"strconv"
 
 	"github.com/gianarb/shopmany/frontend/config"
+	"go.opentelemetry.io/otel/api/propagation"
+	"go.opentelemetry.io/otel/api/trace"
+	"go.opentelemetry.io/otel/plugin/httptrace"
 	"go.uber.org/zap"
 )
 
@@ -32,14 +35,20 @@ type DiscountResponse struct {
 	} `json:"discount"`
 }
 
+var props = propagation.New(propagation.WithInjectors(trace.B3{}))
+
 func getDiscountPerItem(ctx context.Context, hclient *http.Client, itemID int, discountHost string) (int, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/discount", discountHost), nil)
 	if err != nil {
 		return 0, err
 	}
+
 	q := req.URL.Query()
 	q.Add("itemid", strconv.Itoa(itemID))
 	req.URL.RawQuery = q.Encode()
+
+	ctx, req = httptrace.W3C(ctx, req)
+	propagation.InjectHTTP(ctx, props, req.Header)
 	resp, err := hclient.Do(req)
 	if err != nil {
 		return 0, err
@@ -88,6 +97,8 @@ func (h *getItemsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	ctx, req = httptrace.W3C(ctx, req)
+	propagation.InjectHTTP(ctx, props, req.Header)
 	resp, err := h.hclient.Do(req)
 	if err != nil {
 		h.logger.Error(err.Error())
